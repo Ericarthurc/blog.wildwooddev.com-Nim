@@ -10,4 +10,5 @@ proc sharedHead*(ctx: Context, title: string): VNode =
     link(href = "https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap",
         rel = "stylesheet")
     link(rel = "stylesheet", href = "/static/styles/main.css")
+    script(src = "/static/js/highlight.min.js")
   return vNode
