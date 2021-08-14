@@ -13,5 +13,12 @@ bin           = @["server"]
 requires "nim >= 1.4.8"
 requires "prologue >= 0.4.4"
 requires "karax >= 1.2.1"
-requires "markdown >= 0.8.5"
 requires "nmark >= 0.1.9"
+
+task prodbuild, "Build for production":
+    exec "nimble build -d:release --threads:on --tlsEmulation:off"
+
+task extension, "Install all extensions":
+  exec "nimble install prologue"
+  exec "nimble install karax"
+  exec "nimble install https://github.com/Ericarthurc/nmark"

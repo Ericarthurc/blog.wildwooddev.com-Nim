@@ -9,8 +9,8 @@ proc indexSection*(ctx: Context, title: string, parsedMarkdown: string): VNode =
   result = buildHtml(main(class = "content")):
     h3: text "TEST: " & title
     tdiv(): verbatim parsedMarkdown
-    script(): text "hljs.highlightAll();"
-    script(src = "/static/js/version.js")
+    script(): verbatim "hljs.highlightAll();"
+    script(): verbatim r"""console.log(`%cPowered by Nim {v0.0.1}!`, "color: #FF502A");"""
 
 proc indexPage*(ctx: Context, title: string, parsedMarkdown: string): string =
   let head = sharedHead(ctx, title)

@@ -1,6 +1,7 @@
-import strutils, options, sequtils, sugar, os
+import strutils, strformat, options, sequtils, sugar, os
 
 import nmark
+# import ../utils/nmark/nmark
 
 type Meta* = object
     title*: string
@@ -30,7 +31,6 @@ proc markdownParser(rawData: string): string {.gcsafe.} =
     var lined = rawData.split("---")[2]
     return lined.markdown
 
-
 # proc file(path: string) {.async.} =
 #     var file = openAsync("./markdown/" & path)
 #     let data = await file.readAll()
@@ -43,8 +43,8 @@ proc markdownParser(rawData: string): string {.gcsafe.} =
 #         echo metaParser(data)
 #         echo markdownParser(data)
 
-proc getHTMLMarkdown*(): string =
-    var data = readFile("./markdown/wild-memo-2019-9-9.markdown")
+proc getHTMLMarkdown*(fileName: string): string =
+    var data = readFile(fmt"./markdown/{fileName}.markdown")
     return markdownParser(data)
 
 

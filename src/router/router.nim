@@ -4,5 +4,9 @@ import ../handlers/bloghandler
 
 let
     blogPatterns* = @[
-        pattern("/", getBlog, @[HttpGet])
+        pattern("/", getBlogIndex, @[HttpGet]),
+        pattern("/{blog}", getBlog, @[HttpGet])
     ]
+    # seriesPatterns* = @[
+    #     pattern("/",, @[HttpGet])
+    # ]
