@@ -15,7 +15,7 @@ proc indexSection*(ctx: Context, title: string, parsedMarkdown: string): VNode =
 proc indexPage*(ctx: Context, title: string, parsedMarkdown: string): string =
   let head = sharedHead(ctx, title)
   let body = indexSection(ctx, title, parsedMarkdown)
-  let vNode = buildHtml(html):
+  let vNode = buildHtml(html(lang = "en")):
     head
     body
 
