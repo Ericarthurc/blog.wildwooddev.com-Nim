@@ -1,6 +1,6 @@
 import strutils, options, sequtils, sugar, os
 
-import markdown
+import nmark
 
 type Meta* = object
     title*: string
@@ -26,9 +26,9 @@ proc metaParser(rawData: string): Meta =
                     t.series = some(line.split(":")[1].strip())
     return t
 
-proc markdownParser(rawData: string): string =
+proc markdownParser(rawData: string): string {.gcsafe.} =
     var lined = rawData.split("---")[2]
-    return markdown(lined, config = initGfmConfig())
+    return lined.markdown
 
 
 # proc file(path: string) {.async.} =

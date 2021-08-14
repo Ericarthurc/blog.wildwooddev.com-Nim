@@ -1,8 +1,10 @@
 import prologue
 import prologue/middlewares/staticfile
 
-import templates/index
-import utils/parsers
+import router/router
+
+# import templates/index
+# import utils/parsers
 
 let
   env = loadPrologueEnv(".env")
@@ -14,12 +16,10 @@ var app = newApp(settings)
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Pro!</h1>"
 
-proc indexCaller*(ctx: Context) {.async.} =
-  let parsedMarkdown = getHTMLMarkdown()
-  resp htmlResponse(indexPage(ctx, "INDEX", parsedMarkdown))
+# proc indexCaller*(ctx: Context) {.async.} =
+#   let parsedMarkdown = getHTMLMarkdown()
+#   resp htmlResponse(indexPage(ctx, "INDEX", parsedMarkdown))
 
 app.use(staticFileMiddleware(env.get("staticDir")))
-
-app.get("/", indexCaller)
-
+app.addRoute(router.blogPatterns, "/blog")
 app.run()
