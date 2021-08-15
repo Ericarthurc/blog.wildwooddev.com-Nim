@@ -11,7 +11,6 @@ let
 
 var app = newApp(settings)
 
-# app.use(staticFileMiddleware(env.get("staticDir")))
 app.use(staticFileMiddleware("/public"))
 app.get("/manifest.webmanifest", redirectTo("/public/root/manifest.webmanifest"))
 app.get("/robots.txt", redirectTo("/public/root/robots.txt"))

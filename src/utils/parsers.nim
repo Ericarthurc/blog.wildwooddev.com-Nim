@@ -43,11 +43,17 @@ proc markdownParser(rawData: string): string {.gcsafe.} =
 #         echo metaParser(data)
 #         echo markdownParser(data)
 
-proc getHTMLMarkdown*(fileName: string): Future[string] {.async.} =
-    # var data = readFile(fmt"./markdown/{fileName}.markdown")
+proc getMarkdown*(fileName: string): Future[string] {.async.} =
     var file = openAsync(fmt"./markdown/{fileName}.markdown")
     let data = await file.readAll()
+    file.close()
     return markdownParser(data)
+
+proc getMetaSeq*() {.async.} =
+    for _, path in walkDir("./markdown", relative = true):
+        var fileData = openAsync(fmt"./markdown/{path}")
+        let data = await fileData.readAll()
+        echo metaParser(data)
 
 
 # Parse markdown to HTML and get Meta
