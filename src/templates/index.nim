@@ -1,4 +1,4 @@
-import strtabs, strformat
+import strtabs
 
 import karax/[karaxdsl, vdom]
 import prologue

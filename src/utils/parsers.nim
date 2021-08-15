@@ -1,13 +1,14 @@
-import strutils, strformat, options, sequtils, sugar, os, asyncfile, asyncdispatch
+import strutils, strformat, options, sequtils, sugar, os, asyncfile,
+        asyncdispatch, std/algorithm, times
 
 import nmark
 # import ../utils/nmark/nmark
 
-type Meta* = object
-    title*: string
-    date*: string
-    tags*: seq[string]
-    series*: Option[string]
+type Meta = object
+    title: string
+    date: string
+    tags: seq[string]
+    series: Option[string]
 
 proc metaParser(rawData: string): Meta =
     var t = Meta()
@@ -27,21 +28,9 @@ proc metaParser(rawData: string): Meta =
                     t.series = some(line.split(":")[1].strip())
     return t
 
-proc markdownParser(rawData: string): string {.gcsafe.} =
+proc markdownParser(rawData: string): string =
     var lined = rawData.split("---")[2]
     return lined.markdown
-
-# proc file(path: string) {.async.} =
-#     var file = openAsync("./markdown/" & path)
-#     let data = await file.readAll()
-#     echo metaParser(data)
-#     file.close()
-
-# proc readFiles() =
-#     for kind, path in walkDir("./markdown", relative = true):
-#         var data = readFile("./markdown/" & path)
-#         echo metaParser(data)
-#         echo markdownParser(data)
 
 proc getMarkdown*(fileName: string): Future[string] {.async.} =
     var file = openAsync(fmt"./markdown/{fileName}.markdown")
@@ -49,16 +38,24 @@ proc getMarkdown*(fileName: string): Future[string] {.async.} =
     file.close()
     return markdownParser(data)
 
-proc getMetaSeq*() {.async.} =
-    for _, path in walkDir("./markdown", relative = true):
-        var fileData = openAsync(fmt"./markdown/{path}")
-        let data = await fileData.readAll()
-        echo metaParser(data)
-
-
 # Parse markdown to HTML and get Meta
 
-# Get sequence of blog meta (filename, date) [sorted by date]
+proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
+    ## Get sequence of blog meta (filename, date) [sorted by date]
+    var filesMeta: seq[Meta] = @[]
+
+    let filesInPath = toSeq(walkDir("./markdown", relative = true))
+    for file in filesInPath:
+        var fileData = openAsync(fmt"./markdown/{file.path}")
+        let data = await fileData.readAll()
+        filesMeta.add metaParser(data)
+        fileData.close()
+
+    # sort seq[Meta] by date
+    sort(filesMeta, (x, y) => parse(x.date, "MMMM d, yyyy") < parse(y.date,
+            "MMMM d, yyyy"))
+
+    return filesMeta
 
 # Get set of series [sorted alphabetically]
 
