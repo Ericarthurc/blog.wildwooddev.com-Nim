@@ -5,7 +5,7 @@ import ../utils/parsers
 
 proc getBlog*(ctx: Context) {.async.} =
     let blog = ctx.getPathParams("blog")
-    let parsedMarkdown = getHTMLMarkdown(blog)
+    let parsedMarkdown = await getHTMLMarkdown(blog)
     resp htmlResponse(indexPage(ctx, "INDEX", parsedMarkdown))
 
 proc getBlogIndex*(ctx: Context) {.async.} =

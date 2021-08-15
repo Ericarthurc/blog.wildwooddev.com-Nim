@@ -1,4 +1,4 @@
-import strutils, strformat, options, sequtils, sugar, os
+import strutils, strformat, options, sequtils, sugar, os, asyncfile, asyncdispatch
 
 import nmark
 # import ../utils/nmark/nmark
@@ -43,8 +43,10 @@ proc markdownParser(rawData: string): string {.gcsafe.} =
 #         echo metaParser(data)
 #         echo markdownParser(data)
 
-proc getHTMLMarkdown*(fileName: string): string =
-    var data = readFile(fmt"./markdown/{fileName}.markdown")
+proc getHTMLMarkdown*(fileName: string): Future[string] {.async.} =
+    # var data = readFile(fmt"./markdown/{fileName}.markdown")
+    var file = openAsync(fmt"./markdown/{fileName}.markdown")
+    let data = await file.readAll()
     return markdownParser(data)
 
 
