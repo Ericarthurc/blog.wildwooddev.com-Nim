@@ -18,8 +18,23 @@ body {
   text-rendering: geometricPrecision;
 }
 
+h1 {
+  text-align: center;
+  margin: 20px 0px;
+  overflow: hidden;
+  color: #82aaff;
+}
+
+h2 {
+  color: #a3be8c;
+}
+
 h3 {
-  color: #41e14e;
+  color: #61aeee;
+}
+
+h4 {
+  color: #56b6c2;
 }
 
 a {
@@ -29,6 +44,25 @@ a {
 
 a:hover {
   color: #e6c07b;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background: #eceff4;
+  box-shadow: rgb(0 0 0/ 15%) 0px 5px 10px 0px;
+}
+
+.navbar-link {
+  padding: 0 8px;
+  /* font-weight: bold; */
+  color: #2e3440;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #5e81ac;
 }
 
 pre code.hljs {
