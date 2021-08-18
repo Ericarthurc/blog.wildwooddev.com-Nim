@@ -1,4 +1,4 @@
-import prologue, strformat
+import prologue
 import karax/[karaxdsl, vdom]
 
 proc sharedHead*(ctx: Context, title: string): VNode =
@@ -6,7 +6,7 @@ proc sharedHead*(ctx: Context, title: string): VNode =
     meta(charset = "UTF-8")
     meta(name = "viewport", content = "width=device-width, initial-scale=1.0")
     meta(name = "description", content = "Wildwood Tech Blog For Learning")
-    title(text fmt"{title} - testAPP")
+    title(text title)
     link(rel = "preconnect", href = "https://fonts.googleapis.com")
     link(rel = "preconnect", href = "https://fonts.gstatic.com",
         attrs = "crossorigin")

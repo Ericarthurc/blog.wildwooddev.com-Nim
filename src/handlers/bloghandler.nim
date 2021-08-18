@@ -1,6 +1,6 @@
 import prologue
 
-import ../templates/index
+import ../templates/blog
 import ../utils/parsers
 
 proc getBlogIndex*(ctx: Context) {.async.} =
@@ -10,5 +10,5 @@ proc getBlogIndex*(ctx: Context) {.async.} =
 
 proc getBlog*(ctx: Context) {.async.} =
     let blog = ctx.getPathParams("blog")
-    let parsedMarkdown = await getMarkdown(blog)
-    resp htmlResponse(indexPage(ctx, "INDEX", parsedMarkdown))
+    let (parsedMarkdown, parsedMeta) = await getMarkdownAndMeta(blog)
+    resp htmlResponse(blogPage(ctx, blog, parsedMarkdown, parsedMeta))

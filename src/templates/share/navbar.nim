@@ -1,4 +1,4 @@
-import prologue, strformat
+import prologue
 import karax/[karaxdsl, vdom]
 
 proc sharedNav*(ctx: Context): VNode =

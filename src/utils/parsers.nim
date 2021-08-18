@@ -2,13 +2,12 @@ import strutils, strformat, options, sequtils, sugar, os, asyncfile,
         asyncdispatch, std/algorithm, times
 
 import nmark
-# import ../utils/nmark/nmark
 
-type Meta = object
-    title: string
-    date: string
-    tags: seq[string]
-    series: Option[string]
+type Meta* = object
+    title*: string
+    date*: string
+    tags*: seq[string]
+    series*: Option[string]
 
 proc metaParser(rawData: string): Meta =
     var t = Meta()
@@ -32,13 +31,14 @@ proc markdownParser(rawData: string): string =
     var lined = rawData.split("---")[2]
     return lined.markdown
 
-proc getMarkdown*(fileName: string): Future[string] {.async.} =
+
+
+proc getMarkdownAndMeta*(fileName: string): Future[(string, Meta)] {.async.} =
+    ## Parse markdown to HTML and get Meta
     var file = openAsync(fmt"./markdown/{fileName}.markdown")
     let data = await file.readAll()
     file.close()
-    return markdownParser(data)
-
-# Parse markdown to HTML and get Meta
+    return (markdownParser(data), metaParser(data))
 
 proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
     ## Get sequence of blog meta (filename, date) [sorted by date]

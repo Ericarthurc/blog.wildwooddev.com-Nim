@@ -1,6 +1,6 @@
 import prologue
 
-import ../templates/index
+import ../templates/series
 import ../utils/parsers
 
 proc getSeriesIndex*(ctx: Context) {.async.} =
