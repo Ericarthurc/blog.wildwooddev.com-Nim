@@ -10,5 +10,5 @@ let
     ]
     seriesPatterns* = @[
         pattern("/", getSeriesIndex, @[HttpGet]),
-        pattern("/{series}", getSeriesIndex, @[HttpGet])
+        pattern("/{series}", getSeries, @[HttpGet])
     ]

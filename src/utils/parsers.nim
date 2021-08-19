@@ -4,12 +4,13 @@ import strutils, strformat, options, sequtils, sugar, os, asyncfile,
 import nmark
 
 type Meta* = object
+    fileName*: string
     title*: string
     date*: string
     tags*: seq[string]
-    series*: Option[string]
+    series*: string
 
-proc metaParser(rawData: string): Meta =
+proc metaParser(rawData: string, fileName: string): Meta =
     var t = Meta()
 
     var lined = rawData.split("---")[1].split("\n")
@@ -24,7 +25,8 @@ proc metaParser(rawData: string): Meta =
                 of "tags":
                     t.tags = line.split(":")[1].strip().split(", ")
                 of "series":
-                    t.series = some(line.split(":")[1].strip())
+                    t.series = line.split(":")[1].strip()
+        t.fileName = fileName
     return t
 
 proc markdownParser(rawData: string): string =
@@ -38,7 +40,7 @@ proc getMarkdownAndMeta*(fileName: string): Future[(string, Meta)] {.async.} =
     var file = openAsync(fmt"./markdown/{fileName}.markdown")
     let data = await file.readAll()
     file.close()
-    return (markdownParser(data), metaParser(data))
+    return (markdownParser(data), metaParser(data, fileName))
 
 proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
     ## Get sequence of blog meta (filename, date) [sorted by date]
@@ -48,7 +50,7 @@ proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
     for file in filesInPath:
         var fileData = openAsync(fmt"./markdown/{file.path}")
         let data = await fileData.readAll()
-        filesMeta.add metaParser(data)
+        filesMeta.add metaParser(data, file.path.split(".")[0])
         fileData.close()
 
     # sort seq[Meta] by date
@@ -57,6 +59,21 @@ proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
 
     return filesMeta
 
-# Get set of series [sorted alphabetically]
+proc getSeriesSeq*(): Future[seq[string]] {.async.} =
+    ## Get set of series [sorted alphabetically]
+    var seriesSeq: seq[string] = @[]
 
-# Get sequence of blog meta by series (filename, date) [sorted by date]
+    var metaSeq = await getMetaSeq()
+    for meta in metaSeq:
+        if meta.series != "":
+            seriesSeq.add meta.series
+
+    var uniqueSeries = deduplicate(seriesSeq)
+    sort(uniqueSeries, (x, y) => x > y)
+
+    return uniqueSeries
+
+proc getMetaBySeries*(series: string): Future[seq[Meta]] {.async.} =
+    ## Get sequence of blog meta by series (filename, date) [sorted by date]
+    var metaSeq = await getMetaSeq()
+    return filter(metaSeq, proc(x: Meta): bool = x.series == series)

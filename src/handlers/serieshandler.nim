@@ -4,7 +4,8 @@ import ../templates/series
 import ../utils/parsers
 
 proc getSeriesIndex*(ctx: Context) {.async.} =
-  return
+  echo await getSeriesSeq()
 
 proc getSeries*(ctx: Context) {.async.} =
-  return
+  let series = ctx.getPathParams("series")
+  echo await getMetaBySeries(series)
