@@ -37,6 +37,9 @@ proc markdownParser(rawData: string): string =
 
 proc getMarkdownAndMeta*(fileName: string): Future[(string, Meta)] {.async.} =
     ## Parse markdown to HTML and get Meta
+
+    ## NEEDS TO SEND ERROR IF FILE ISN'T IN DIR
+
     var file = openAsync(fmt"./markdown/{fileName}.markdown")
     let data = await file.readAll()
     file.close()
@@ -75,5 +78,8 @@ proc getSeriesSeq*(): Future[seq[string]] {.async.} =
 
 proc getMetaBySeries*(series: string): Future[seq[Meta]] {.async.} =
     ## Get sequence of blog meta by series (filename, date) [sorted by date]
+
+    ## NEEDS TO SEND ERROR IF SERIES ISN'T IN LIST
+
     var metaSeq = await getMetaSeq()
     return filter(metaSeq, proc(x: Meta): bool = x.series == series)

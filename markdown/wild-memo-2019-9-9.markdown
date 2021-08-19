@@ -21,17 +21,6 @@ series: security
 Hey Wildwood and WCA Staff!
 It’s been awhile since I have sent out a world tech update; but I kind of like writing these and I hope it spreads more knowledge on safe internet practices. I fully believe knowledge is power and security when it comes to the internet. I will preface this by saying these updates can get super long so I will break it up into three parts regarding the topics and if you have time to read them, awesome; if not, all good :D. The overall theme I want to touch is internet data and ways we can be proactive in protecting our own data. Like I said in the past the internet is a super weird place. It has no true one creator, and is probably the fastest and largest growing infrastructure of anything to ever exist on Earth created by man. In 1985 AoL was formed, starting the first real consumer internet project; and at that point in history really nothing consumer even ran on the internet. It wasn’t until around 1995 companies like Google, Yahoo, Ebay, Amazon and others started showing up to the internet party. Side note, Google image search ‘Amazon’s website in 2000’, the internet has come a long way haha. At this time the internet was also very inaccessible and expensive to use; and there wasn’t a ‘mobile’ market. Using the internet required large and expensive desktop computers with an expensive modem card and then a subscription to AoL to actually use the internet. Fast forward to 2019 and 52% of all internet traffic in the world is done on a mobile device. Every single day the world creates 2.5 billion Gigabytes of data and it’s exponentially growing. With all that data floating around that leads me to the topic of how the internet makes money.
 
-<a href="https://insider.windows.com/en-us/" target="_blank" rel="noreferrer">'Windows Insider Program'</a>
-
-```cs
-import { serve } from "https://deno.land/std/http/server.ts";
-const s = serve({ port: 8000 });
-console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\n" });
-}
-```
-
 ## Data Selling
 
 In todays data centered, mobile, fast growing internet world money drives a lot of it. And when it comes to how the internet makes money the consumer suffers a lot here. Now there are millions of ways people are making money using the internet, but one of the most prominent is data selling. Data selling is when one company sells data to another company. Data is power on the internet. Say you are a small business that sells a product targeted to youth. You want to optimize where and when you advertise your product to draw in your target audience. So, you buy analytics data from say Google; the data tells your things like what sites are being used the most by your target audience and at what times they use these sites. This allows you to optimize when and where you advertise your product. This is how the internet runs and makes money; analytics data. The issue falls on how these companies get the data; what kinds of data are they saving and to who are they selling the data too. And this leads to the topic of cookies.
