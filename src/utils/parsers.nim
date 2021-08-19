@@ -1,6 +1,7 @@
-import strutils, strformat, options, sequtils, sugar, os, asyncfile,
+import strutils, strformat, sequtils, sugar, os, asyncfile,
         asyncdispatch, std/algorithm, times
 
+import prologue
 import nmark
 
 type Meta* = object
@@ -37,13 +38,13 @@ proc markdownParser(rawData: string): string =
 
 proc getMarkdownAndMeta*(fileName: string): Future[(string, Meta)] {.async.} =
     ## Parse markdown to HTML and get Meta
-
-    ## NEEDS TO SEND ERROR IF FILE ISN'T IN DIR
-
-    var file = openAsync(fmt"./markdown/{fileName}.markdown")
-    let data = await file.readAll()
-    file.close()
-    return (markdownParser(data), metaParser(data, fileName))
+    try:
+        var file = openAsync(fmt"./markdown/{fileName}.markdown")
+        let data = await file.readAll()
+        file.close()
+        return (markdownParser(data), metaParser(data, fileName))
+    except:
+        raise newException(ValueError, fmt"{fileName} can't be found!")
 
 proc getMetaSeq*(): Future[seq[Meta]] {.async.} =
     ## Get sequence of blog meta (filename, date) [sorted by date]
@@ -79,7 +80,11 @@ proc getSeriesSeq*(): Future[seq[string]] {.async.} =
 proc getMetaBySeries*(series: string): Future[seq[Meta]] {.async.} =
     ## Get sequence of blog meta by series (filename, date) [sorted by date]
 
-    ## NEEDS TO SEND ERROR IF SERIES ISN'T IN LIST
-
     var metaSeq = await getMetaSeq()
-    return filter(metaSeq, proc(x: Meta): bool = x.series == series)
+    metaSeq = filter(metaSeq, proc(x: Meta): bool = x.series == series)
+
+    let seriesSeq = await getSeriesSeq()
+    if seriesSeq.count(series) == 0:
+        raise newException(ValueError, fmt"{series} can't be found!")
+    else:
+        return metaSeq

@@ -9,5 +9,8 @@ proc getBlogIndex*(ctx: Context) {.async.} =
 
 proc getBlog*(ctx: Context) {.async.} =
     let blog = ctx.getPathParams("blog")
-    let (parsedMarkdown, parsedMeta) = await getMarkdownAndMeta(blog)
-    resp htmlResponse(blogPage(ctx, blog, parsedMarkdown, parsedMeta))
+    try:
+        let (parsedMarkdown, parsedMeta) = await getMarkdownAndMeta(blog)
+        resp htmlResponse(blogPage(ctx, blog, parsedMarkdown, parsedMeta))
+    except:
+        respDefault Http404
