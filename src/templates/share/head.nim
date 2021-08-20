@@ -21,5 +21,6 @@ proc sharedHead*(ctx: Context, title: string): VNode =
         href = "/public/favicon/favicon-16x16.png")
     link(rel = "manifest", href = "/public/favicon/site.webmanifest")
     link(rel = "stylesheet", href = "/public/styles/main.css")
+    link(rel = "stylesheet", href = "/public/styles/markdown.css")
     script(src = "/public/js/highlight.min.js")
   return vNode

@@ -12,6 +12,7 @@ type Meta* = object
     series*: string
 
 proc metaParser(rawData: string, fileName: string): Meta =
+    ## splits file string and takes top header, then parses each line into the right Meta object field
     var t = Meta()
 
     var lined = rawData.split("---")[1].split("\n")
@@ -31,7 +32,8 @@ proc metaParser(rawData: string, fileName: string): Meta =
     return t
 
 proc markdownParser(rawData: string): string =
-    var lined = rawData.split("---")[2]
+    ## splits file string into three parts; maxsplit = 2 to avoid accidental splits after header
+    var lined = rawData.split("---", maxsplit = 2)[2]
     return lined.markdown
 
 

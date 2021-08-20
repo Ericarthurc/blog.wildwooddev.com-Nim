@@ -6,8 +6,6 @@ tags: wildwood, blog, wildwooddev, markdown
 
 # New Blog Site
 
-If you are coming from the email, <a href="#new-part">click here</a> or scroll down to 'New Part!'
-
 Hey Wildwood Staff, I am excited to announce a cool new project I have been working on. As the IT guy around here, an important aspect of my job is to quickly and efficiently share new technological information that further develops a safe and working computer/network environment. I want to set every employee here up for success when it comes to working with our on-site networks and devices, but also your personal devices and home networks.
 
 Over the past couple of years, I have emailed out some ‘IT memos’ that target our computer work flow here and promote safer internet habits. But, these memos can get very long, it’s hard to explain everything in text form, and there isn’t a single location to look back at previous memos.
@@ -43,7 +41,7 @@ Well… <a href="https://blog.wildwooddev.com/blog/wild-memo-2021-7-5" target="_
 
 ## New Part!
 
-Welp this is the site! I really hope you like it; if you click the <a href="#navbar">'Home'</a> at the top of the page that will take you to the master list of 'blog' posts, and then you can click the 'New Blog Site!' link at the top of the list to come back here.
+Welp this is the site! I really hope you like it; if you click the <a href="#navbar">'Blog'</a> at the top of the page that will take you to the master list of 'blog' posts, and then you can click the 'New Blog Site!' link at the top of the list to come back here.
 
 ## What this site can do!
 

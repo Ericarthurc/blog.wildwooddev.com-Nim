@@ -54,16 +54,16 @@ I wanted to do a little technical preview post on how I designed aspects of the 
 
 This site is designed using a couple different technologies.
 
-- <a href="https://nodejs.org/en/" target="_blank">Nodejs</a> | Javascript runtime engine
-- <a href="https://koajs.com/" target="_blank">Koa</a> | Nodejs web server framework
-- <a href="https://ejs.co/" target="_blank">EJS</a> | HTML templating engine
-- <a href="https://www.markdownguide.org/" target="_blank">Markdown</a> | Markdown text syntax
-- <a href="https://marked.js.org/" target="_blank">MarkdownJS</a> | Markdown parser
-- <a href="https://www.nginx.com/" target="_blank">Nginx</a> | Reverse proxy
+- <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer">Nodejs</a> | Javascript runtime engine
+- <a href="https://koajs.com/" target="_blank" rel="noreferrer">Koa</a> | Nodejs web server framework
+- <a href="https://ejs.co/" target="_blank" rel="noreferrer">EJS</a> | HTML templating engine
+- <a href="https://www.markdownguide.org/" target="_blank" rel="noreferrer">Markdown</a> | Markdown text syntax
+- <a href="https://marked.js.org/" target="_blank" rel="noreferrer">MarkdownJS</a> | Markdown parser
+- <a href="https://www.nginx.com/" target="_blank" rel="noreferrer">Nginx</a> | Reverse proxy
 
 ## Backend Layout
 
-The backend layout I choose for this project is based around a common design pattern called <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC</a>.
+The backend layout I choose for this project is based around a common design pattern called <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank" rel="noreferrer">MVC</a>.
 
 - M: Model
 - V: View
@@ -71,7 +71,7 @@ The backend layout I choose for this project is based around a common design pat
 
 <div class="mvc">
 
-![Backend Layout](/static/images/mvclayout.png)
+![Backend Layout](/public/images/mvclayout.png)
 
 </div>
 
@@ -246,9 +246,9 @@ If you look at this function, the "/:id" part is how the server knows what blog 
 
 I want to end this blog post by showing you the complete source code for this page in both Markdown and HTML. These will be external links, due to how long they are; but try to imagine writing the HTML part by hand. It is doable but a lot of work. This blog post was hand written in Markdown and it takes just as long as writing a word doc file, pretty cool!
 
-<a href="/source/html.text" target="_blank">HTML Source</a>
+<a href="/public/source/html.text" target="_blank" rel="noreferrer">HTML Source</a>
 
-<a href="/source/markdown.text" target="_blank">Markdown Source</a>
+<a href="/public/source/markdown.text" target="_blank" rel="noreferrer">Markdown Source</a>
 
 ## Conclusion
 

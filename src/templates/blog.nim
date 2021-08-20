@@ -11,13 +11,13 @@ proc blogIndexSection(ctx: Context, parsedMetaSeq: seq[Meta]): VNode =
   result = buildHtml(main(class = "content")):
     tdiv(class = "main-container"):
       h2(class = "main-header"): text "Wildwood Tech Posts"
-      ul(class = "indexSeq"):
+      ul(class = "index-list"):
         for meta in parsedMetaSeq:
           li:
-            a(class = "", href = fmt"/blog/{meta.fileName}"):
-              tdiv(class = ""):
-                span(class = "index-info__title"): text meta.title
-                span(class = "index-info__date"): text meta.date
+            a(class = "list-anchor", href = fmt"/blog/{meta.fileName}"):
+              tdiv(class = "list-anchor__info"):
+                span(class = "info-title"): text meta.title
+                span(class = "info-date"): text meta.date
 
 proc blogIndex*(ctx: Context, parsedMetaSeq: seq[Meta]): string =
   let head = sharedHead(ctx, "Blog")
@@ -37,7 +37,7 @@ proc blogIndex*(ctx: Context, parsedMetaSeq: seq[Meta]): string =
 proc blogSection(ctx: Context, parsedMarkdown: string,
     parsedMeta: Meta): VNode =
   result = buildHtml(main(class = "content")):
-    tdiv(class = "main-container"): verbatim parsedMarkdown
+    tdiv(class = "blog-container"): verbatim parsedMarkdown
     p(class = "tags"):
       text "Tags "
       for tag in parsedMeta.tags:
