@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.0.9.1"
+version       = "0.9.0"
 author        = "Ericarthurc"
 description   = "Nim backend tests"
 license       = "MIT"

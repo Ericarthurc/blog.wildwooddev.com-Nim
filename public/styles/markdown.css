@@ -1,6 +1,4 @@
 .blog-container {
-  /* display: flex; */
-  /* flex-direction: column; */
   margin: 0 20%;
   word-wrap: break-word;
 }
@@ -18,28 +16,28 @@ h1 {
   text-align: center;
   margin: 20px 0px;
   overflow: hidden;
-  color: #82aaff;
+  color: #FFE220;
 }
 
 h2 {
-  color: #a3be8c;
+  color: #BD93F9;
 }
 
 h3 {
-  color: #61aeee;
+  color: #FF79C6;
 }
 
 h4 {
-  color: #56b6c2;
+  color: #8BE9FD;
 }
 
 a {
   text-decoration: none;
-  color: #d19a66;
+  color: #CDB300;
 }
 
 a:hover {
-  color: #e6c07b;
+  color: #fae8c8;
 }
 
 pre code.hljs {
