@@ -1,6 +1,6 @@
 ## Nim edition of blog.wildwooddev.com
 
-### Site v0.9.0
+### Site v0.9.1
 
 #### Nim v1.4.8
 
